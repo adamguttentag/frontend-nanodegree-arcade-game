@@ -26,7 +26,7 @@ var Engine = (function(global) {
         lastTime;
 
     canvas.width = 505;
-    canvas.height = 606;
+    canvas.height = 603;
     doc.body.appendChild(canvas);
 
     /* This function serves as the kickoff point for the game loop itself
@@ -67,6 +67,8 @@ var Engine = (function(global) {
         reset();
         lastTime = Date.now();
         main();
+        // initiate gem repositioning at 1-second intervals
+        setInterval(function() {gem.update();}, 1000);
     }
 
     /* This function is called by main (our game loop) and itself calls all
@@ -80,7 +82,6 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
     }
 
     /* This is called by the update function  and loops through all of the
@@ -94,7 +95,6 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
-        player.update();
     }
 
     /* This function initially draws the "game level", it will then call
@@ -108,12 +108,12 @@ var Engine = (function(global) {
          * for that particular row of the game level.
          */
         var rowImages = [
-                'images/water-block.png',   // Top row is water
+                'images/water-block.svg',  // Top row is a custom water animated svg
                 'images/stone-block.png',   // Row 1 of 3 of stone
                 'images/stone-block.png',   // Row 2 of 3 of stone
                 'images/stone-block.png',   // Row 3 of 3 of stone
-                'images/grass-block.png',   // Row 1 of 2 of grass
-                'images/grass-block.png'    // Row 2 of 2 of grass
+                'images/grass-block.svg',   // Row 1 of 2 of custom grass animated svg
+                'images/grass-block.svg'    // Row 2 of 2 of custom grass animated svg
             ],
             numRows = 6,
             numCols = 5,
@@ -135,8 +135,6 @@ var Engine = (function(global) {
                 ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
             }
         }
-
-
         renderEntities();
     }
 
@@ -151,8 +149,10 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
-
+        // call player render function
         player.render();
+        // call gem render function
+        gem.render();
     }
 
     /* This function does nothing but it could have been a good place to
@@ -169,9 +169,24 @@ var Engine = (function(global) {
      */
     Resources.load([
         'images/stone-block.png',
-        'images/water-block.png',
-        'images/grass-block.png',
+        // Load animated SVG I created with SMIL based on the default image.
+        // 8.2K versus 8.5K for the default static PNG.
+        // Waves appear to drift away from the land, occasionally reversing.
+        // Note: in Chrome the console complains about the use of SMIL because
+        // the Blink team announced a few months ago it would deprecate SMIL.
+        // After the announcement, YouTube (also owned by Google) introduced
+        // its new HTML5 player which uses SMIL to animate the play button,
+        // so it's unlikely Chrome will actually break SMIL in the near future.
+        'images/water-block.svg',
+        // Load animated SVG I created with SMIL based on the default image.
+        // 5.4K versus 9.2K for the default static PNG.
+        // Some of the grass intermittently appears to wave in the wind.
+        'images/grass-block.svg',
         'images/enemy-bug.png',
+        'images/Gem Green.png',
+        // Load animated SVG I created with SMIL.
+        // Paper crane's wings flap as its tail is pulled.
+        'images/crane.svg',
         'images/char-boy.png'
     ]);
     Resources.onReady(init);
@@ -182,3 +197,83 @@ var Engine = (function(global) {
      */
     global.ctx = ctx;
 })(this);
+
+/* CUSTOM FUNCTION:
+ * This function is called by handleInput and repaints the message area
+ * below the game on each key-up. Because you can only paint on the canvas,
+ * anything painted STAYS there unless you paint over it with something else.
+ * This function paints a white rect over the message area to clear it,
+ * and if the game has something to say, it then paints that.
+ */
+function paintMessage(message, textColor) {
+    // set fill style to white
+    ctx.fillStyle="#fff";
+    // paint two white rectangles to clear the message areas
+    ctx.fillRect(0,585,505,610);
+    ctx.fillRect(0,0,505,60);
+    // set font style
+    ctx.font = "16px serif";
+    // set font color to the passed textColor
+    ctx.fillStyle=textColor;
+    // paint the message at the bottom of the screen
+    ctx.fillText(message, 0, 600);
+    // set font color to black
+    ctx.fillStyle="#000";
+    // paint score and lives values
+    ctx.fillText("Score " + score, 0, 12);
+    ctx.fillText("Level " + level, 0, 30);
+    // if no lives remain
+    if (lives === 0) {
+        // set font color to red
+        ctx.fillStyle="#f00";
+        // set font style
+        ctx.font = "24px serif";
+        // paint a game over message with instructions
+        ctx.fillText("Game Over. Press Y to play again.", 100, 30);
+    // if lives remain
+    } else {
+        // paint the number of lives
+        ctx.fillText("Lives " + lives, 100, 30);
+    }
+}
+
+// handle game over conditions, disabling further play
+// and instructing player on next steps to play again
+function gameOver() {
+    // calls paintMessage, which will detect no lives remain
+    paintMessage('','#fff');
+    // remove enemies so they no longer appear or update
+    allEnemies = [];
+    // reposition player off screen
+    offscreenPlayer();
+    // reposition gem off screen
+    repositionGem();
+}
+
+// Reposition player at start coordinates.
+// Called on collision, level completion and game reset.
+function repositionPlayer() {
+    player.x = 200;
+    player.y = 403;
+}
+
+// Repositions gem offscreen after it is collected or during game over
+function repositionGem() {
+    gem.x = -100;
+    gem.y = -100;
+}
+
+// Repositions character offscreen during game over
+function offscreenPlayer() {
+    player.x = -100;
+    player.y = -100;
+}
+
+// Updates score by amount, awards extra life if scoreGoal is met
+function updateScore(amount) {
+    score += amount;
+    if (score >= scoreGoal) {
+        lives++;
+        scoreGoal += 10000;
+    }
+}

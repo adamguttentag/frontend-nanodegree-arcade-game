@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="101px" height="171px" viewBox="0 0 75.761 128.268" enable-background="new 0 0 75.761 128.268" xml:space="preserve">
+<defs>
+	<clipPath id="wave-area">
+    <path d="M75.337,122.268c0,6.628-2.35,6-8.909,6H9.252
+	c-6.561,0-8.909,0.628-8.909-6V43.5c0-6.628,2.349-6,8.909-6h59.155c6.561,0,6.93-0.628,6.93,6V122.268z"/>
+	</clipPath>
+	<linearGradient id="block-gradient" gradientUnits="userSpaceOnUse" x1="37.8403" y1="128.2832" x2="37.8403" y2="37.4844">
+		<stop offset="0" style="stop-color:#4D6CFB"/>
+		<stop offset="0.33" style="stop-color:#3E4391"/>
+		<stop offset="0.36" style="stop-color:#4F67D2"/>
+	</linearGradient>
+	<radialGradient id="swell-top-gradient" cx="39.124" cy="56.375" r="26.7701" gradientTransform="matrix(0.9899 0 0 1 -0.1512 0)" gradientUnits="userSpaceOnUse">
+		<stop offset="0.1234" style="stop-color:#6379DF"/>
+		<stop offset="1" style="stop-color:#4B64D0"/>
+	</radialGradient>
+	<radialGradient id="swell-bottom-gradient" cx="28.374" cy="83.3125" r="20.1793" gradientTransform="matrix(0.9899 0 0 0.6 -0.1512 33.325)" gradientUnits="userSpaceOnUse">
+		<stop offset="0.1234" style="stop-color:#6379DF"/>
+		<stop offset="1" style="stop-color:#4B64D0"/>
+	</radialGradient>
+	<linearGradient id="outlinel-gradient" gradientUnits="userSpaceOnUse" x1="36.4722" y1="96.125" x2="36.4722" y2="39.0029">
+		<stop offset="0.0793" style="stop-color:#97A8EF;stop-opacity:0"/>
+		<stop offset="0.1319" style="stop-color:#97A8EF;stop-opacity:0.1246"/>
+		<stop offset="1" style="stop-color:#97A8EF"/>
+	</linearGradient>
+	<linearGradient id="outliner-gradient" gradientUnits="userSpaceOnUse" x1="72.1406" y1="123.46" x2="72.1406" y2="43.1245">
+		<stop offset="0.0793" style="stop-color:#97A8EF;stop-opacity:0"/>
+		<stop offset="0.1319" style="stop-color:#97A8EF;stop-opacity:0.1246"/>
+		<stop offset="1" style="stop-color:#97A8EF"/>
+	</linearGradient>
+	<g id="wave">
+		<path fill="#6579D8" d="M12.975,105.375c0,0,4.331-6.875,13.239-7.25c8.909-0.375,6.558,0,6.558,0s3.96-0.75,7.3-4.75c3.342-4,6.559-13.375,13.24-13.375c6.681,0,9.774-0.625,9.774-0.625s5.567-0.625,10.022-7.875c4.454-7.25,5.445-9.125,9.651-9.25v4.375c0,0-2.846-0.25-5.444,2.875c-2.598,3.125-7.301,10.634-7.301,10.634s-2.846,3.991-9.775,4.241c-6.928,0.25-8.412-0.25-11.011,2.625S38.711,98.375,38.711,98.375s-1.979,2.75-7.3,3.25c-5.32,0.5-7.547-0.25-13.116,2.875c-5.568,3.125-5.32,5.625-5.32,5.625V105.375z"/>
+		<radialGradient id="sparkle1-gradient" cx="53.7598" cy="81.0625" r="2.7986" gradientTransform="matrix(0.9899 0 0 0.4 -0.1512 48.6375)" gradientUnits="userSpaceOnUse">
+			<stop offset="0.0446" style="stop-color:#B4BEEC"/>
+			<stop offset="1" style="stop-color:#B4BEEC;stop-opacity:0"/>
+		</radialGradient>
+		<radialGradient id="sparkle2-gradient" cx="24.2603" cy="99.125" r="2.7986" gradientTransform="matrix(0.9899 0 0 0.4 -0.1512 59.475)" gradientUnits="userSpaceOnUse">
+			<stop offset="0.0446" style="stop-color:#B4BEEC"/>
+			<stop offset="1" style="stop-color:#B4BEEC;stop-opacity:0"/>
+		</radialGradient>
+		<ellipse fill="url(#sparkle1-gradient)" cx="53.064" cy="81.062" rx="3.774" ry="1.062"/>
+		<ellipse fill="url(#sparkle2-gradient)" cx="23.863" cy="99.125" rx="3.774" ry="1.062"/>
+	</g>
+</defs>
+<!-- CLIP-PATH applied to group restricts animated waves to the space inside the block -->
+<g style="clip-path:url(#wave-area);">
+	<path id="block" fill="url(#block-gradient)" stroke="#505050" stroke-width="1" d="M75.337,122.268c0,6.628-2.35,6-8.909,6H9.252c-6.561,0-8.909,0.628-8.909-6V43.5c0-6.628,2.349-6,8.909-6h59.155c6.561,0,6.93-0.628,6.93,6V122.268z"/>
+	<path id="swell-top" fill="url(#swell-top-gradient)" d="M73.347,58.5c0,6.627-5.319,12-11.879,12H15.686c-6.56,0-11.878-5.373-11.878-12v-4.25c0-6.627,5.318-12,11.878-12h45.782c6.56,0,11.879,5.373,11.879,12V58.5z"/>
+	<path id="swell-bottom" fill="url(#swell-bottom-gradient)" d="M53.178,84.125c0,6.627-5.319,12-11.879,12H14.573c-6.561,0-11.879-5.373-11.879-12V82.5c0-6.627,5.318-12,11.879-12h26.726c6.56,0,11.879,5.373,11.879,12V84.125z"/>
+	<g>
+		<use xlink:href="#wave" x="18" y="32" opacity="1"/>
+		<use xlink:href="#wave" x="9" y="16" opacity="1"/>
+		<use xlink:href="#wave" x="0" y="0" opacity="1"/>
+		<use xlink:href="#wave" x="-9" y="-16" opacity="1"/>
+		<use xlink:href="#wave" x="-18" y="-32" opacity="1"/>
+		<use xlink:href="#wave" x="-27" y="-48" opacity="1"/>
+		<animateMotion from="0,0" to="-9,-16" dur="6s" repeatCount="indefinite" values="
+			0,0;
+			-9,-16;
+			-8,-15;
+			-8,-15;
+			-8,-15;
+			-7,-14;
+			-8,-15;
+			-8,-15;
+			-8,-15;
+			-9,-16;"/>
+		<!--animateTransform attributeName="transform" dur="6s" type="rotate" repeatCount="indefinite" values="
+			0 50 85;
+			5 50 50;
+			0 50 85;"/-->
+	</g>
+	<path id="outlinel" fill="none" stroke="url(#outlinel-gradient)" stroke-width="1" d="M2.323,96.125V41.5c0,0,0-2,1.732-2c1.733,0,67.064,0,67.064,0"/>
+	<path id="outliner" fill="none" stroke="url(#outliner-gradient)" stroke-width="1" d="M73.841,43.125l0.125,73.75c0,0,0,4.5-3.96,6.125"/>
+	<path id="outlinec" fill="none" stroke="#A7B4F6" stroke-width="1" d="M68.893,127c0,0,5.078,1.25,5.073-5.875"/>
+</g>
+</svg>
